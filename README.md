@@ -17,18 +17,20 @@ Each track has its own `README.md` with a step-by-step guide and a "Suggested Ch
 
 - Python 3.10+
 - [Ollama](https://ollama.com) installed (`curl -fsSL https://ollama.com/install.sh | sh`)
-- 16GB+ RAM (32GB+ recommended for 30B models)
+- 16GB+ RAM (24GB+ recommended for 12B models)
 
-All four tracks talk to local models over Ollama's OpenAI-compatible API at `http://localhost:11434/v1`. Swap in llama.cpp, vLLM, LM Studio, or MLX by pointing `OPENAI_BASE_URL` elsewhere — every example uses the same `client.py` pattern.
+All four tracks default to **Google Gemma 4** as the local model and talk to it over Ollama's OpenAI-compatible API at `http://localhost:11434/v1`. Swap in llama.cpp, vLLM, LM Studio, or MLX by pointing `OPENAI_BASE_URL` elsewhere — every example uses the same `client.py` pattern.
 
-## Hardware tiers
+To use a different model family (Qwen, Llama, Mistral, Phi), set the per-track env var (e.g., `POCKETCODER_MODEL=qwen3:8b`) or edit the track's `client.py`.
 
-| RAM | Suggested models |
+## Hardware tiers (Gemma 4)
+
+| RAM | Suggested model |
 |---|---|
-| 8GB | `qwen3:1.7b`, `gemma3:1b` |
-| 16GB | `qwen3:8b`, `gemma3:4b`, `llama3.3:8b` |
-| 24GB+ | `qwen3:14b`, `gemma3:12b` |
-| 64GB+ | `qwen3:32b`, anything you want |
+| 8GB | `gemma4:1b` |
+| 16GB | `gemma4:4b` (default in all tracks) |
+| 24GB+ | `gemma4:12b` |
+| 64GB+ | `gemma4:27b` |
 
 ## Pick your track
 

@@ -4,12 +4,12 @@ This is a small example corpus you can use to test the airgap RAG pipeline befor
 
 ## About the hackathon
 
-The Small Models Hack is a SundAI club event focused on the new generation of local language models. Recent releases like Gemma 4 and Qwen 3.6 have made it feasible to run capable models on a laptop, and the goal of the hack is to push these models in real applications — agentic harnesses, on-device assistants, custom fine-tunes — and to build evals that show what they can and can't do.
+The Small Models Hack is a SundAI club event focused on the new generation of local language models. Recent releases like Google's Gemma 4 have made it feasible to run capable models on a laptop, and the goal of the hack is to push these models in real applications — agentic harnesses, on-device assistants, custom fine-tunes — and to build evals that show what they can and can't do.
 
 ## Hardware notes
 
-- A 16GB MacBook Air can run Qwen 3.6 8B at usable speeds via MLX or Ollama.
-- For 30B-class models, 32GB+ unified memory is recommended.
+- A 16GB MacBook Air can run Gemma 4 4B at usable speeds via MLX or Ollama.
+- For 12B-class Gemma 4 models, 24GB+ unified memory is recommended.
 - Embedding models like nomic-embed-text use about 300MB of RAM.
 
 ## What "airgap" means here

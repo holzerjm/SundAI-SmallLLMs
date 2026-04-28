@@ -1,7 +1,7 @@
 """Distillation scaffold: generate a training set from a strong model, then fine-tune a tiny model.
 
 Stage 1 (`generate`) is fully runnable. It produces a JSONL file of (question, sql) pairs by
-having a strong model (default: qwen3:8b, but point at GPT-4o or Claude for better data) solve
+having a strong model (default: gemma4:4b, but point at GPT-4o or Claude for better data) solve
 many variations of the task.
 
 Stage 2 (`train`) is a scaffold. The actual training loop is gated behind --actually-train and
@@ -89,11 +89,11 @@ def cmd_train(args):
     print("  - TRL + PEFT (general):      https://huggingface.co/docs/trl")
     print()
     print("Example MLX-LM command:")
-    print(f"  mlx_lm.lora --model mlx-community/Qwen3-1.7B-4bit \\")
+    print(f"  mlx_lm.lora --model mlx-community/gemma-4-1b-it-4bit \\")
     print(f"              --train --data {args.data} --iters 500 --adapter-path {args.out}")
     print()
     print("After training:")
-    print("  mlx_lm.fuse --model mlx-community/Qwen3-1.7B-4bit \\")
+    print("  mlx_lm.fuse --model mlx-community/gemma-4-1b-it-4bit \\")
     print(f"              --adapter-path {args.out} --save-path {args.out}-fused")
     print()
     print("Then convert to GGUF and import into Ollama with `ollama create my-finetune -f Modelfile`.")
@@ -121,14 +121,14 @@ def main():
 
     g = sp.add_parser("generate", help="produce a training JSONL using a teacher model")
     g.add_argument("--n", type=int, default=200)
-    g.add_argument("--teacher", default="qwen3:8b",
-                   help="strong model used as teacher. Set OPENAI_BASE_URL=https://api.openai.com/v1 + --teacher gpt-4o for cloud.")
+    g.add_argument("--teacher", default="gemma4:4b",
+                   help="strong model used as teacher. Pass --teacher gemma4:12b for a stronger local teacher, or set OPENAI_BASE_URL=https://api.openai.com/v1 + --teacher gpt-4o for cloud.")
     g.add_argument("--out", default="training.jsonl")
     g.set_defaults(func=cmd_generate)
 
     t = sp.add_parser("train", help="scaffold for LoRA fine-tuning")
     t.add_argument("--data", required=True)
-    t.add_argument("--base", default="qwen3:1.7b")
+    t.add_argument("--base", default="gemma4:1b")
     t.add_argument("--out", default="my-finetune")
     t.add_argument("--actually-train", action="store_true")
     t.set_defaults(func=cmd_train)

@@ -9,9 +9,9 @@ fi
 python3 -m pip install --quiet openai rich
 
 echo "pulling models (this is the slow part)..."
-ollama pull qwen3:8b
-ollama pull gemma3:4b
+ollama pull gemma4:4b
+ollama pull gemma4:1b
 
 mkdir -p results
 echo
-echo "ready. try:  python bench.py --model qwen3:8b --out results/qwen3-8b.json"
+echo "ready. try:  python bench.py --model gemma4:4b --out results/gemma4-4b.json"

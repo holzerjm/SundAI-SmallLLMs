@@ -23,7 +23,7 @@ airgap/
 ./setup.sh
 ```
 
-Pulls `qwen3:8b` (chat), `nomic-embed-text` (embeddings), and installs `numpy` and `gradio`.
+Pulls `gemma4:4b` (chat), `nomic-embed-text` (embeddings), and installs `numpy` and `gradio`. Override the chat model with `AIRGAP_CHAT_MODEL=gemma4:12b`.
 
 ### 2. Ingest a folder
 

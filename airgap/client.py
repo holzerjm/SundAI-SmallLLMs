@@ -9,7 +9,7 @@ def make_client(base_url: str | None = None) -> OpenAI:
     return OpenAI(base_url=base_url, api_key=api_key)
 
 
-CHAT_MODEL = os.environ.get("AIRGAP_CHAT_MODEL", "qwen3:8b")
+CHAT_MODEL = os.environ.get("AIRGAP_CHAT_MODEL", "gemma4:4b")
 EMBED_MODEL = os.environ.get("AIRGAP_EMBED_MODEL", "nomic-embed-text")
 
 

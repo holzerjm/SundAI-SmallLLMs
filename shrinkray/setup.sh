@@ -9,13 +9,13 @@ fi
 python3 -m pip install --quiet openai
 
 # small + medium for routing
-ollama pull qwen3:1.7b
-ollama pull qwen3:8b
+ollama pull gemma4:1b
+ollama pull gemma4:4b
 
 # different quants of the same model for the comparison
-# (Ollama serves quantized variants by tag; check `ollama search qwen3` for what's available)
-ollama pull qwen3:8b-q4_K_M || true
-ollama pull qwen3:8b-q8_0   || true
+# (Ollama serves quantized variants by tag; check `ollama search gemma4` for what's available)
+ollama pull gemma4:4b-q4_K_M || true
+ollama pull gemma4:4b-q8_0   || true
 
 echo
 echo "ready. try:"

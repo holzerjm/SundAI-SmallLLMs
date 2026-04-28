@@ -9,4 +9,4 @@ def make_client(base_url: str | None = None) -> OpenAI:
     return OpenAI(base_url=base_url, api_key=api_key)
 
 
-MODEL = os.environ.get("POCKETCODER_MODEL", "qwen3:8b")
+MODEL = os.environ.get("POCKETCODER_MODEL", "gemma4:4b")

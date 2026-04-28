@@ -62,7 +62,7 @@ def main():
     ap.add_argument(
         "--models",
         nargs="+",
-        default=["qwen3:8b", "qwen3:8b-q4_K_M", "qwen3:8b-q8_0", "qwen3:1.7b"],
+        default=["gemma4:4b", "gemma4:4b-q4_K_M", "gemma4:4b-q8_0", "gemma4:1b"],
         help="Ollama tags to compare. Skip silently if a tag isn't pulled.",
     )
     ap.add_argument("--out", default="quant_results.json")

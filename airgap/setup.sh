@@ -8,7 +8,7 @@ fi
 
 python3 -m pip install --quiet openai numpy gradio
 
-ollama pull qwen3:8b
+ollama pull gemma4:4b
 ollama pull nomic-embed-text
 
 echo

@@ -23,7 +23,7 @@ pocketcoder/
 ./setup.sh
 ```
 
-Pulls `qwen3:8b` by default. Edit the script for other models.
+Pulls `gemma4:4b` by default. Edit the script for other models, or override with `POCKETCODER_MODEL=gemma4:12b python agent.py ...`.
 
 ### 2. One-shot a task from the CLI
 

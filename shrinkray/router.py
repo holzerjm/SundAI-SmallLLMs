@@ -9,8 +9,8 @@ from client import make_client
 import task
 
 
-SMALL = "qwen3:1.7b"
-BIG = "qwen3:8b"
+SMALL = "gemma4:1b"
+BIG = "gemma4:4b"
 
 
 def validate(t: dict, response: str) -> bool:
