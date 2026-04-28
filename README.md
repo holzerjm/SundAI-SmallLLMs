@@ -1,15 +1,26 @@
 # Small Models Hack — Starter Kit
 
-Hackathon starter code for SundAI's "Small Models Hack." Each track is a self-contained directory you can push to GitHub as its own repo.
+Hackathon starter code for SundAI's "Small Models Hack." Each track is a self-contained directory you can work in independently.
 
 ## Tracks
+
+### Starter tracks
 
 | Repo | Theme | What you build |
 |---|---|---|
 | [smallbench](./smallbench) | Benchmarking & Evals | A reproducible eval harness comparing local models on real tasks |
 | [pocketcoder](./pocketcoder) | Harnesses & Infra | A local Claude-Code-style coding agent that runs entirely offline |
-| [airgap](./airgap) | Local-First Apps | Private RAG over your own docs, on-device only |
+| [airgap](./airgap) | Local-First Apps | Private RAG over your own docs (dense embeddings), on-device only |
 | [shrinkray](./shrinkray) | Pushing the Limits | Quantization comparisons, model routing, and a distillation scaffold |
+
+### Advanced tracks
+
+| Repo | Theme | What you build |
+|---|---|---|
+| [clawhive](./clawhive) | Multi-Agent Orchestration | A Plan → Act → Critique swarm using [ZeroClaw](https://github.com/zeroclaw-labs/zeroclaw) as the chat surface; mixes frontier Claude with local Gemma 4 workers |
+| [nanochat](./nanochat) | Streaming Q&A over a corpus | A Streamlit chat app with lexical retrieval (no embeddings), inspired by the [DataCamp Nemotron-3 Nano tutorial](https://www.datacamp.com/tutorial/nemotron-3-nano-tutorial); local Gemma 4 by default, one-flag swap to Nemotron-3 Nano via Ollama Cloud |
+
+The starter tracks are scoped for a weekend with one or two builders. The advanced tracks assume you've already shipped something local-LLM-shaped before, or you're a team of three+ who want to coordinate on a deeper system.
 
 Each track has its own `README.md` with a step-by-step guide and a "Suggested Challenges" section to extend the starter into a hackathon submission.
 
@@ -18,8 +29,9 @@ Each track has its own `README.md` with a step-by-step guide and a "Suggested Ch
 - Python 3.10+
 - [Ollama](https://ollama.com) installed (`curl -fsSL https://ollama.com/install.sh | sh`)
 - 16GB+ RAM (24GB+ recommended for 12B models)
+- Optional: an Anthropic or OpenAI API key (only the `clawhive` track needs frontier access; everything else is fully local)
 
-All four tracks default to **Google Gemma 4** as the local model and talk to it over Ollama's OpenAI-compatible API at `http://localhost:11434/v1`. Swap in llama.cpp, vLLM, LM Studio, or MLX by pointing `OPENAI_BASE_URL` elsewhere — every example uses the same `client.py` pattern.
+All tracks default to **Google Gemma 4** as the local model and talk to it over Ollama's OpenAI-compatible API at `http://localhost:11434/v1`. Swap in llama.cpp, vLLM, LM Studio, or MLX by pointing `OPENAI_BASE_URL` elsewhere — every example uses the same `client.py` pattern.
 
 To use a different model family (Qwen, Llama, Mistral, Phi), set the per-track env var (e.g., `POCKETCODER_MODEL=qwen3:8b`) or edit the track's `client.py`.
 
@@ -37,3 +49,12 @@ To use a different model family (Qwen, Llama, Mistral, Phi), set the per-track e
 ```bash
 cd smallbench && ./setup.sh && cat README.md
 ```
+
+## How the tracks fit together
+
+If you want to combine tracks for an ambitious submission:
+
+- **smallbench + any other track** — Use smallbench as the eval harness for whatever you build. Every other track produces something measurable.
+- **shrinkray + clawhive** — Distill a specialized small model in shrinkray, then plug it into clawhive as one of the workers. Demo a swarm where one agent is a fine-tune of yours.
+- **airgap + nanochat** — Build the same Q&A workload twice: once with dense retrieval (airgap), once with lexical (nanochat). Find the corpus regime where each wins.
+- **pocketcoder + clawhive** — Use pocketcoder's tool-calling harness as the "coder" role inside clawhive's swarm. Now the coder can edit files and run tests, not just emit code.

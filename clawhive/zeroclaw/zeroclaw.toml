@@ -1,0 +1,87 @@
+# Drop this at ~/.zeroclaw/config.toml
+#
+# Wires ZeroClaw to:
+#   - a local Ollama provider (Gemma 4 family)
+#   - the Anthropic frontier provider (for use inside the swarm)
+#   - one custom shell tool that delegates to the clawhive Python orchestrator
+
+# ---------- agent identity ----------
+[agent]
+name = "clawhive-conductor"
+description = "Triage assistant. Delegates complex multi-step tasks to a Python swarm."
+
+# Which provider/model the conductor itself uses. Keep this small — the conductor's
+# job is triage, not reasoning. The smarts are inside the swarm.
+default_model = "gemma4:4b"
+
+system_prompt_file = "/path/to/clawhive/zeroclaw/conductor_prompt.md"   # update this path
+
+# ---------- model providers ----------
+
+[providers.models.gemma4-4b]
+provider = "ollama"
+endpoint = "http://localhost:11434/v1"
+model    = "gemma4:4b"
+
+[providers.models.gemma4-1b]
+provider = "ollama"
+endpoint = "http://localhost:11434/v1"
+model    = "gemma4:1b"
+
+[providers.models.gemma4-12b]
+provider = "ollama"
+endpoint = "http://localhost:11434/v1"
+model    = "gemma4:12b"
+
+# Optional: frontier provider for the swarm planner.
+# The shell tool below picks this up via env vars; no need to call it directly here.
+[providers.models.claude]
+provider = "anthropic"
+endpoint = "https://api.anthropic.com/v1"
+model    = "claude-sonnet-4-5"
+api_key_env = "ANTHROPIC_API_KEY"
+
+# ---------- fallback chain ----------
+# If the local provider is down, fail loudly rather than silently routing to the cloud.
+[providers.fallback_chains.default]
+order = ["gemma4-4b"]
+
+# ---------- custom shell tool ----------
+# This is the bridge to the Python orchestrator.
+[[tools]]
+name = "delegate_to_swarm"
+description = """
+Delegate a complex, multi-step task to the clawhive swarm. Use this for anything that
+involves planning, multiple coding steps, or that would benefit from a frontier-model
+plan. Do NOT use for chitchat, simple Q&A, or single-line questions — answer those
+yourself.
+
+Returns the assembled output of the swarm.
+"""
+type = "shell"
+command = "python /path/to/clawhive/zeroclaw/agent_tools.py delegate"   # update this path
+arg_template = "{task}"
+timeout_s = 300
+
+[tools.parameters]
+task = { type = "string", description = "The full task description to delegate." }
+
+# ---------- channels (optional, uncomment to enable) ----------
+# [[channels]]
+# name = "cli"
+# type = "cli"
+#
+# [[channels]]
+# name = "discord"
+# type = "discord"
+# token_env = "DISCORD_BOT_TOKEN"
+#
+# [[channels]]
+# name = "telegram"
+# type = "telegram"
+# token_env = "TELEGRAM_BOT_TOKEN"
+
+# ---------- memory ----------
+[memory]
+type = "sqlite"
+path = "~/.zeroclaw/memory.db"

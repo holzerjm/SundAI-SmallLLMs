@@ -13,6 +13,9 @@ airgap/*.index.json
 shrinkray/quant_results.json
 shrinkray/training.jsonl
 shrinkray/my-finetune*/
+nanochat/corpus.json
+nanochat/compare_results.json
+nanochat/questions.txt
 
 # Editor / OS
 .DS_Store
