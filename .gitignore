@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# Track outputs
+smallbench/results/
+airgap/index.json
+airgap/*.index.json
+shrinkray/quant_results.json
+shrinkray/training.jsonl
+shrinkray/my-finetune*/
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
