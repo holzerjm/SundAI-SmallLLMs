@@ -1,5 +1,10 @@
 # Small Models Hack — Starter Kit
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Made with Python](https://img.shields.io/badge/made%20with-Python-3776AB?logo=python&logoColor=white)](https://www.python.org)
+[![Ollama](https://img.shields.io/badge/Ollama-local%20LLM-000000?logo=ollama&logoColor=white)](https://ollama.com)
+[![Hackathon](https://img.shields.io/badge/event-hackathon-orange.svg)](#)
+
 Hackathon starter code for SundAI's "Small Models Hack." Each track is a self-contained directory you can work in independently.
 
 ## Tracks
